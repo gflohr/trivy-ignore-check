@@ -81,6 +81,20 @@ Alternatively, you can `trivy` with the experimental option
 `--show-suppressed`. The tool `trivy-ignore-check` will automatically
 detect that.
 
+## Pipeline Integration
+
+The tool terminates with exit code 0 (success) if no unnecessary ignore
+entries have been found or 1 (failure) if there were such entries. It is
+probably a good idea to make these failures non-fatal, and let the
+pipeline continue with a warning.
+
+The tool does *not* make an attempt to patch the `.trivyignore` file, leave
+alone create a pull request. The structure of the `.trivyignore` file can
+differ significantly between organisations and projects, and the file
+is security relevant. If you want to automate the clean-up of the ignore
+file, implement an approach that fits your needs yourself. It will be
+simple with the output of `trivy-ignore-check`.
+
 ## Reporting Bugs
 
 Please report bugs at https://github.com/gflohr/trivy-ignore-check/issues.
