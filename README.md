@@ -11,21 +11,21 @@ Keep your [`.trivyignore`](https://trivy.dev/) files clean.
 ## Description
 
 Trivy is a popular vulnerability scanner. It allows you to specify a list
-of vulnerabilities by id that should suppressed. By default, this list is read
-from a file `.trivyignore` in the current directory.
+of vulnerabilities by id that should suppressed. By default, Trivy reads this
+list from a `.trivyignore` file in the current directory.
 
-Such files have the potential to grow because `trivy` does not report any
-vulnerabilities listed in the ignore file that do not correspond to a finding.
+These files can grow indefinitely because Trivy does not report vulnerabilities
+listed in the ignore file that are no longer present in the scan results.
 
-This is where this tool jumps in. It takes a vulnerability scanning report
-and checks it against a `.trivyignore` file. Gratuituous entries are printed
+This is where this tool comes in. It takes a vulnerability scanning report
+and checks it against a `.trivyignore` file. Unnecessary entries are printed
 to the console.
 
 ## Why
 
 It is good practice to keep the `trivyignore` short. Not only because it
 is generally a bad idea to ignore vulnerabilities. But also, because
-ignoring vulnerabilities that no longer exist clutters your view of real
+ignoring vulnerabilities that no longer exist can clutter your view of real
 security risks.
 
 ## Dependencies
@@ -56,7 +56,8 @@ yarn global add trivy-ignore-check
 bun add -g trivy-ignore-check
 ```
 
-You may have to prepend `sudo` if you need root privileges.
+You may need to prepend `sudo` if you need root privileges in Un*x
+environments.
 
 ## Usage
 
@@ -66,21 +67,19 @@ You invoke the tool like this:
 npx trivy-ignore-check .trivyignore trivy-findings.json
 ```
 
-You have probably guessed already that you have to replace `.trivyignore`
-with the path to your `trivy` ignore file, and `trivy-findings.json` with
-the path of a file containing the results of a `trivy` scan in JSON format.
-
+Replace `.trivyignore` with your Trivy ignore file path, and
+`trivy-findings.json` with the path to a Trivy scan report in JSON format.
 If you omit the path to the findings file, standard input is read instead:
 
 ```shell
 npx trivy-ignore-check .trivyignore
 ```
 
-## Running the `trivy` Scan
+## Running the Trivy Scan
 
 You can invoke `trivy` any way you like, but you will normally have to
 invoke without or with an empty `.trivyignore` file (try `/dev/null`).
-Otherwise `trivy-check-ignore` will report all entries in the ignore file
+Otherwise `trivy-ignore-check` will report all entries in the ignore file
 as unnecessary.
 
 You cannot run `trivy`with the experimental option `--show-suppressed`. The
