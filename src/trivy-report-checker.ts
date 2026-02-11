@@ -22,21 +22,21 @@ export class TrivyReportChecker {
 		exitCallback: ExitCallback = process.exit,
 	) {
 		const foundIDs: string[] = [];
-		this.report.Results?.forEach(result => {
+		this.report.Results.forEach(result => {
 			result.Vulnerabilities?.forEach(v => {
 				foundIDs.push(v.VulnerabilityID);
 			});
 		});
 
 		let unneeded = 0;
-		const seen: string[] = [];
+		const seen: Set<string> = new Set<string>();
 
 		for (let i = 0; i < ignoredIDs.length; ++i) {
 			const id = ignoredIDs[i];
-			if (seen.includes[id]) {
+			if (seen.has(id)) {
 				continue;
 			}
-			seen.push(id);
+			seen.add(id);
 
 			if (!foundIDs.includes(id)) {
 				hitCallback(id);

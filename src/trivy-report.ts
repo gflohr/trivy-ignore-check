@@ -1,5 +1,5 @@
 export type TrivyReport = {
-	Results?: {
+	Results: {
 		Vulnerabilities?: {
 			VulnerabilityID: string;
 		}[];
