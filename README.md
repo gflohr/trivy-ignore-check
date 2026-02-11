@@ -24,9 +24,9 @@ to the console.
 ## Why
 
 It is good practice to keep the `trivyignore` short. Not only because it
-is generally a bad idea to ignore vulnerabilities. But also, because it
-makes it hard to keep an overview of the security status of the project,
-as it is impossible to see how many vulnerabilities are really ignored.
+is generally a bad idea to ignore vulnerabilities. But also, because
+ignoring vulnerabilities that no longer exist clutters your view of real
+security risks.
 
 ## Dependencies
 
