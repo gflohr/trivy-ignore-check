@@ -1,7 +1,7 @@
 [![licence](https://img.shields.io/badge/licence-WTFPL-blue)](http://www.wtfpl.net/)
 [![price](https://img.shields.io/badge/price-FREE-green)](https://github.com/gflohr/qgoda/blob/main/LICENSE)
 [![coverage](https://img.shields.io/coverallsCoverage/github/gflohr/trivy-ignore-check?branch=main)](https://coveralls.io/github/gflohr/trivy-ignore-check?branch=main)
-[![downloads](https://img.shields.io/npm/dw/%40trivy-ignore-check)](https://img.shields.io/npm/dw/%40trivy-ignore-check)
+[![downloads](https://img.shields.io/npm/dw/%40trivy-ignore-check)](https://npmjs.com/package/trivy-ignore-check)
 
 # Trivy Ignore Check <!-- omit from toc -->
 
