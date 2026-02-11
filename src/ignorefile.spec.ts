@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import { Ignorefile } from './Ignorefile';
+import { Ignorefile } from './ignorefile';
 
 jest.mock('fs');
 
