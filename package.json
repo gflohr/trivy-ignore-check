@@ -1,97 +1,94 @@
 {
-  "name": "trivy-ignore-check",
-  "version": "1.0.0",
-  "description": "Check a .trivyignore file for unneeded entries.",
-  "main": "dist/index.js",
-  "keywords": [
-    "trivy",
-    "ci",
-    "pipeline",
-    "vulnerability scanning"
-  ],
-  "publishConfig": {
-    "access": "public"
-  },
-  "author": {
-    "name": "Guido Flohr",
-    "url": "https://www.guido-flohr.net/"
-  },
-  "license": "WTFPL",
-  "packageManager": "pnpm@10.18.3",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/gflohr/trivy-ignore-check.git"
-  },
-  "bugs": {
-    "url": "https://github.com/gflohr/trivy-ignore-check/issues"
-  },
-  "homepage": "https://github.com/gflohr/trivy-ignore-check#readme",
-  "files": [
-    "dist"
-  ],
-  "bin": {
-    "e-invoice-eu": "dist/index.js"
-  },
-  "scripts": {
-    "build": "rimraf ./dist && tsc && chmod +x dist/index.js",
-    "prepublishOnly": "pnpm run build",
-    "format": "prettier --write 'src/**/*.ts' *.mjs *.json",
-    "watch": "tsc --watch",
-    "clean": "rimraf ./dist",
-    "lint": "eslint './src/**/*.ts'",
-    "lint:fix": "eslint --fix './src/**/*.ts'",
-    "lint:fix-dry-run": "eslint --fix './src/**/*.ts'",
-    "lint:staged": "lint-staged",
-    "pretest": "node ./write-package.mjs >src/package.ts",
-    "pretest:watch": "node ./write-package.mjs >src/package.ts",
-    "pretest:cov": "node ./write-package.mjs >src/package.ts",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:cov": "jest --coverage",
-    "prepare": "husky"
-  },
-  "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "json",
-      "ts"
-    ],
-    "rootDir": "src",
-    "testRegex": "\\.spec\\.ts$",
-    "transform": {
-      "^.+\\.ts$": [
-        "ts-jest",
-        {
-          "tsconfig": {
-            "isolatedModules": true
-          }
-        }
-      ]
-    },
-    "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
-  },
-  "lint-staged": {
-    "*.{ts,json,md}": [
-      "prettier --write"
-    ],
-    "src/**/*.ts": [
-      "eslint"
-    ]
-  },
-  "devDependencies": {
-    "@types/jest": "^30.0.0",
-    "@types/node": "^25.2.3",
-    "acorn": "latest",
-    "eslint": "^10.0.0",
-    "eslint-plugin-import": "^2.32.0",
-    "husky": "^9.1.7",
-    "jest": "^30.2.0",
-    "lint-staged": "^16.2.7",
-    "prettier": "^3.8.1",
-    "rimraf": "^6.1.2",
-    "ts-jest": "^29.4.6",
-    "typescript": "^5.9.3",
-    "typescript-eslint": "^8.55.0"
-  }
+	"name": "trivy-ignore-check",
+	"version": "1.0.0",
+	"description": "Check a .trivyignore file for unneeded entries.",
+	"main": "dist/index.js",
+	"keywords": [
+		"trivy",
+		"ci",
+		"pipeline",
+		"vulnerability scanning"
+	],
+	"publishConfig": {
+		"access": "public"
+	},
+	"author": {
+		"name": "Guido Flohr",
+		"url": "https://www.guido-flohr.net/"
+	},
+	"license": "WTFPL",
+	"packageManager": "pnpm@10.18.3",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/gflohr/trivy-ignore-check.git"
+	},
+	"bugs": {
+		"url": "https://github.com/gflohr/trivy-ignore-check/issues"
+	},
+	"homepage": "https://github.com/gflohr/trivy-ignore-check#readme",
+	"files": [
+		"dist"
+	],
+	"bin": {
+		"e-invoice-eu": "dist/index.js"
+	},
+	"scripts": {
+		"build": "rimraf ./dist && tsc && chmod +x dist/index.js",
+		"prepublishOnly": "pnpm run build",
+		"format": "prettier --write 'src/**/*.ts' *.mjs *.json",
+		"watch": "tsc --watch",
+		"clean": "rimraf ./dist",
+		"lint": "eslint './src/**/*.ts'",
+		"lint:fix": "eslint --fix './src/**/*.ts'",
+		"lint:fix-dry-run": "eslint --fix './src/**/*.ts'",
+		"lint:staged": "lint-staged",
+		"test": "jest",
+		"test:watch": "jest --watch",
+		"test:cov": "jest --coverage",
+		"prepare": "husky"
+	},
+	"jest": {
+		"moduleFileExtensions": [
+			"js",
+			"json",
+			"ts"
+		],
+		"rootDir": "src",
+		"testRegex": "\\.spec\\.ts$",
+		"transform": {
+			"^.+\\.ts$": [
+				"ts-jest",
+				{
+					"tsconfig": {
+						"isolatedModules": true
+					}
+				}
+			]
+		},
+		"coverageDirectory": "../coverage",
+		"testEnvironment": "node"
+	},
+	"lint-staged": {
+		"*.{ts,json,md}": [
+			"prettier --write"
+		],
+		"src/**/*.ts": [
+			"eslint"
+		]
+	},
+	"devDependencies": {
+		"@types/jest": "^30.0.0",
+		"@types/node": "^25.2.3",
+		"acorn": "latest",
+		"eslint": "^10.0.0",
+		"eslint-plugin-import": "^2.32.0",
+		"husky": "^9.1.7",
+		"jest": "^30.2.0",
+		"lint-staged": "^16.2.7",
+		"prettier": "^3.8.1",
+		"rimraf": "^6.1.2",
+		"ts-jest": "^29.4.6",
+		"typescript": "^5.9.3",
+		"typescript-eslint": "^8.55.0"
+	}
 }
