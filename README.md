@@ -1,3 +1,8 @@
+[![licence](https://img.shields.io/badge/licence-WTFPL-blue)](http://www.wtfpl.net/)
+[![price](https://img.shields.io/badge/price-FREE-green)](https://github.com/gflohr/qgoda/blob/main/LICENSE)
+[![coverage](https://img.shields.io/coverallsCoverage/github/gflohr/trivy-ignore-check?branch=main)](https://coveralls.io/github/gflohr/trivy-ignore-check?branch=main)
+[![downloads](https://img.shields.io/npm/dw/%40trivy-ignore-check)](https://img.shields.io/npm/dw/%40trivy-ignore-check)
+
 # Trivy Ignore Check <!-- omit from toc -->
 
 Keep your [trivy](https://trivy.dev/) ignore files clean.
@@ -84,7 +89,8 @@ detect that.
 ## Pipeline Integration
 
 The tool terminates with exit code 0 (success) if no unnecessary ignore
-entries have been found or 1 (failure) if there were such entries. It is
+entries have been found or 2 if there were such entries. Every other error
+code means that the tool has failed for some other reason. It is
 probably a good idea to make these failures non-fatal, and let the
 pipeline continue with a warning.
 
