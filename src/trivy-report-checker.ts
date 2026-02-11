@@ -1,4 +1,5 @@
 import * as fs from 'fs';
+
 import { TrivyReport } from './trivy-report';
 
 type HitCallback = (id: string) => void;

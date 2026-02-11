@@ -1,4 +1,5 @@
 import * as fs from 'fs';
+
 import { Ignorefile } from './ignorefile';
 
 jest.mock('fs');

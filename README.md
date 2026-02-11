@@ -82,9 +82,9 @@ invoke without or with an empty `.trivyignore` file (try `/dev/null`).
 Otherwise `trivy-check-ignore` will report all entries in the ignore file
 as unnecessary.
 
-Alternatively, you can `trivy` with the experimental option
-`--show-suppressed`. The tool `trivy-ignore-check` will automatically
-detect that.
+You cannot run `trivy`with the experimental option `--show-suppressed`. The
+output format will not be recognised. That may change, once the option
+`--show-suppressed` is no longer experimental.
 
 ## Pipeline Integration
 
