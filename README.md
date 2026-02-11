@@ -9,7 +9,7 @@ Keep your [trivy](https://trivy.dev/) ignore files clean.
 
 ## Description
 
-Trivy is a populare vulnerability scanner. It allows you to specify a list
+Trivy is a popular vulnerability scanner. It allows you to specify a list
 of vulnerabilities by id that should suppressed. By default, this list is read
 from a file `.trivyignore` in the current directory.
 
