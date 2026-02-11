@@ -1,3 +1,5 @@
+#! /usr/bin/env node
+
 import { Ignorefile } from './ignorefile';
 import { TrivyReportChecker } from './trivy-report-checker';
 
