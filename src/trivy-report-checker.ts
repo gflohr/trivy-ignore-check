@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 
-import { TrivyReport } from './trivy-report';
+import { type TrivyReport } from './trivy-report';
 
 type HitCallback = (id: string) => void;
 type ExitCallback = (code: 0 | 1 | 2) => void;

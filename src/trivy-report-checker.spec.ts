@@ -1,7 +1,7 @@
 // src/trivy-report-checker.spec.ts
 import * as fs from 'fs';
 
-import { TrivyReport } from './trivy-report';
+import { type TrivyReport } from './trivy-report';
 import { TrivyReportChecker } from './trivy-report-checker';
 
 jest.mock('fs');
