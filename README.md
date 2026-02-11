@@ -32,6 +32,8 @@ security risks.
 
 You need a recent version of [Node.js](https://nodejs.org/).
 
+Apart from that, the tool has zero runtime dependencies.
+
 ## Installation
 
 This tool is meant to be run inside of a CI/CD pipeline, and there is normally
