@@ -5,7 +5,7 @@
 
 # Trivy Ignore Check <!-- omit from toc -->
 
-Keep your [trivy](https://trivy.dev/) ignore files clean.
+Keep your [`.trivyignore`](https://trivy.dev/) files clean.
 
 ## Description
 
