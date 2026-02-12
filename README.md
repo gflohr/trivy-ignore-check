@@ -66,7 +66,7 @@ environments.
 You invoke the tool like this:
 
 ```shell
-npx trivy-ignore-check .trivyignore trivy-findings.json
+npx trivy-ignore-check .trivyignore trivy-findings-1.json trivy-findings-2.json
 ```
 
 Replace `.trivyignore` with your Trivy ignore file path, and
@@ -76,6 +76,8 @@ If you omit the path to the findings file, standard input is read instead:
 ```shell
 npx trivy-ignore-check .trivyignore
 ```
+
+In this case, you can only use one scan report.
 
 ## Running the Trivy Scan
 
@@ -102,6 +104,125 @@ differ significantly between organisations and projects, and the file
 is security relevant. If you want to automate the clean-up of the ignore
 file, implement an approach that fits your needs yourself. It will be
 simple with the output of `trivy-ignore-check`.
+
+### GitHub Actions
+
+In GitHub Actions, you can add a job like this:
+
+```yaml
+jobs:
+  trivy-ignore-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Install latest Trivy. Replace "latest" with something like "v0.69.1" to
+      # lock the version.
+      - name: Install Trivy
+        uses: aquasecurity/trivy-action@0.20.0
+        with:
+          version: latest
+
+      - name: Scan first image
+        run: |
+          set -euo pipefail
+          trivy image --quiet --ignorefile /dev/null \
+            --severity HIGH,CRITICAL --format json my-image-1:latest \
+            > report-1.json
+
+      - name: Scan second image
+        run: |
+          set -euo pipefail
+          trivy image --quiet --ignorefile /dev/null \
+            --severity HIGH,CRITICAL --format json my-image-2:latest \
+            > report-2.json
+
+      - name: Check for unnecessary .trivyignore entries
+        run: |
+          set -euo pipefail
+          npx --yes trivy-ignore-check .trivyignore report-1.json report-2.json
+        continue-on-error: true
+```
+
+If you only scan a single image, you can pipe the output directly:
+
+```yaml
+      - name: Scan and check ignore file
+        run: |
+          set -euo pipefail
+          trivy image --quiet --ignorefile /dev/null \
+            --severity HIGH,CRITICAL --format json my-image:latest \
+            | npx --yes trivy-ignore-check .trivyignore
+        continue-on-error: true
+```
+
+### Azure DevOps
+
+In Azure DevOps, you will typically add something like this to your pipeline:
+
+```yaml
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- checkout: self
+  displayName: 'Checkout repository'
+
+# Install latest Trivy. Replace "latest" with something like "v0.69.1" to
+# lock the version.
+- script: |
+    set -euo pipefail
+    curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin latest
+  displayName: 'Install Trivy'
+
+# Install Node.js (required for npx).
+- task: NodeTool@0
+  inputs:
+    versionSpec: '22.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    set -euo pipefail
+    npm ci
+  displayName: 'Install dependencies'
+
+- script: |
+    set -euo pipefail
+    trivy image --quiet --ignorefile /dev/null \
+      --severity HIGH,CRITICAL --format json my-image-1:latest \
+      > report-1.json
+  displayName: 'Trivy scan image 1'
+
+- script: |
+    set -euo pipefail
+    trivy image --quiet --ignorefile /dev/null \
+      --severity HIGH,CRITICAL --format json my-image-2:latest \
+      > report-2.json
+  displayName: 'Trivy scan image 2'
+
+- script: |
+    set -euo pipefail
+    npx --yes trivy-ignore-check .trivyignore report-1.json report-2.json
+  displayName: 'Find unneeded .trivyignore entries'
+  continueOnError: true
+```
+
+If you perform only one scan, you can combine it into a single step:
+
+```yaml
+- script: |
+    set -euo pipefail
+    trivy image --quiet --ignorefile /dev/null \
+      --severity HIGH,CRITICAL --format json my-image:latest \
+      | npx --yes trivy-ignore-check .trivyignore
+  displayName: 'Find unneeded .trivyignore entries'
+  continueOnError: true
+```
 
 ## Reporting Bugs
 
