@@ -1,20 +1,21 @@
 import * as fs from 'fs';
 
-import { TrivyReport } from './trivy-report';
+import { type TrivyReport } from './trivy-report';
 
 type HitCallback = (id: string) => void;
 type ExitCallback = (code: 0 | 1 | 2) => void;
 
 export class TrivyReportChecker {
-	private readonly report: TrivyReport;
+	private readonly reports: TrivyReport[] = [];
 
-	constructor(filename?: string) {
-		const contents =
-			typeof filename === 'undefined'
-				? fs.readFileSync(0, 'utf8')
-				: fs.readFileSync(filename, 'utf8');
+	constructor(filenames?: string[]) {
+		const reportFilenames: Array<string | number> =
+			(filenames && filenames.length) ? filenames : [ 0 ];
 
-		this.report = JSON.parse(contents);
+		reportFilenames.forEach(filename => {
+			const contents = fs.readFileSync(filename, 'utf8');
+			this.reports.push(JSON.parse(contents));
+		});
 	}
 
 	public check(
@@ -23,9 +24,12 @@ export class TrivyReportChecker {
 		exitCallback: ExitCallback = process.exit,
 	) {
 		const foundIDs: string[] = [];
-		this.report.Results.forEach(result => {
-			result.Vulnerabilities?.forEach(v => {
-				foundIDs.push(v.VulnerabilityID);
+
+		this.reports.forEach(report => {
+			report.Results.forEach(result => {
+				result.Vulnerabilities?.forEach(v => {
+					foundIDs.push(v.VulnerabilityID);
+				});
 			});
 		});
 

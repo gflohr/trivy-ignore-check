@@ -1,7 +1,7 @@
 // src/trivy-report-checker.spec.ts
 import * as fs from 'fs';
 
-import { TrivyReport } from './trivy-report';
+import { type TrivyReport } from './trivy-report';
 import { TrivyReportChecker } from './trivy-report-checker';
 
 jest.mock('fs');
@@ -37,7 +37,7 @@ describe('TrivyReportChecker', () => {
 		const hitCallback = jest.fn();
 		const exitCallback = jest.fn();
 
-		const checker = new TrivyReportChecker('dummy.json');
+		const checker = new TrivyReportChecker(['dummy.json']);
 		checker.check(
 			['CVE-1234', 'CVE-5678', 'CVE-ABCD'], // ignored IDs
 			hitCallback,
@@ -56,7 +56,7 @@ describe('TrivyReportChecker', () => {
 		const hitCallback = jest.fn();
 		const exitCallback = jest.fn();
 
-		const checker = new TrivyReportChecker('dummy.json');
+		const checker = new TrivyReportChecker(['dummy.json']);
 		checker.check(
 			['CVE-1234', 'CVE-5678', 'CVE-9999'], // all IDs present
 			hitCallback,
@@ -71,7 +71,7 @@ describe('TrivyReportChecker', () => {
 		const hitCallback = jest.fn();
 		const exitCallback = jest.fn();
 
-		const checker = new TrivyReportChecker('dummy.json');
+		const checker = new TrivyReportChecker(['dummy.json']);
 		checker.check(
 			['CVE-ABCD', 'CVE-ABCD'], // duplicate unneeded ID
 			hitCallback,
@@ -95,7 +95,7 @@ describe('TrivyReportChecker input/output selection', () => {
 	});
 
 	it('should read input from a given file', () => {
-		new TrivyReportChecker('report.json');
+		new TrivyReportChecker(['report.json']);
 		expect(fs.readFileSync).toHaveBeenCalledWith('report.json', 'utf8');
 	});
 
@@ -131,7 +131,8 @@ describe('TrivyReportChecker callbacks', () => {
 			throw new Error('process.exit called');
 		});
 
-		const checker = new TrivyReportChecker('dummy.json');
+		const checker = new TrivyReportChecker(['dummy.json']
+		);
 
 		try {
 			checker.check(['CVE-ABCD']);
