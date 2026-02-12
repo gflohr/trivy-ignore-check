@@ -1,5 +1,11 @@
 # trivy-ignore-check
 
+## 1.2.0
+
+### Minor Changes
+
+- check against multiple reports
+
 ## 1.1.1
 
 ### Patch Changes
