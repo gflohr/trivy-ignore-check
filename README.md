@@ -8,6 +8,19 @@
 
 Keep your [`.trivyignore`](https://trivy.dev/) files clean.
 
+- [Description](#description)
+- [Why](#why)
+- [Dependencies](#dependencies)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Running the Trivy Scan](#running-the-trivy-scan)
+- [Pipeline Integration](#pipeline-integration)
+	- [GitHub Actions](#github-actions)
+	- [Azure DevOps](#azure-devops)
+- [Reporting Bugs](#reporting-bugs)
+- [Copyright](#copyright)
+- [Disclaimer](#disclaimer)
+
 ## Description
 
 Trivy is a popular vulnerability scanner. It allows you to specify a list
