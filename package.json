@@ -1,6 +1,6 @@
 {
 	"name": "trivy-ignore-check",
-	"version": "1.2.0",
+	"version": "1.2.1",
 	"description": "Check a .trivyignore file for unneeded entries.",
 	"main": "dist/index.js",
 	"keywords": [
