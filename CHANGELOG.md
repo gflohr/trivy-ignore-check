@@ -1,5 +1,11 @@
 # trivy-ignore-check
 
+## 1.2.1
+
+### Patch Changes
+
+- fix downloads badge link
+
 ## 1.2.0
 
 ### Minor Changes
